@@ -2,7 +2,7 @@
   <section class="form__wrapper">
     <div class="container">
       <div class="row form">
-        <div class="col-5 d-flex flex-column left">
+        <div class="col-5 col-xs-12 d-flex flex-column left">
           <div class="form__input-group">
             <label for="name">Имя <span>*</span></label>
             <input type="text"
@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="col-1"></div>
-        <div class="col-6 right">
+        <div class="col-6 col-xs-12 right">
           <div class="form__input-group">
             <label for="comment">Комментарий <span>*</span></label>
             <textarea

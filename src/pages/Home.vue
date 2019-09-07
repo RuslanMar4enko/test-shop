@@ -7,10 +7,10 @@
           <h3>Выводим комментарии</h3>
           <div class="comments-view">
             <div class="row">
-              <div class="col-4"
+              <div class="col-4 col-xs-12"
                    v-for="(comment, index) in comments"
                    v-bind:key="index">
-                <router-link :to="{name: 'showComment'}">
+                <router-link :to="{name: 'showComment', query: { data: comment }}">
                   <div class="comments__item"
                        :class="classComment(index)">
                     <div class="comments__item-header">
@@ -21,7 +21,7 @@
                       <p>{{ comment.comment }}</p>
                     </div>
                   </div>
-                </router-link >
+                </router-link>
               </div>
             </div>
           </div>
