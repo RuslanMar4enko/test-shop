@@ -1,80 +1,64 @@
 <template>
-  <section class="form__wrapper">
-    <div class="container">
-      <div class="row form">
-        <div class="col-5 d-flex flex-column left">
-          <div class="form__input-group">
-            <label for="name">Имя <span>*</span></label>
-            <input type="text"
-                   id="name"
-                   v-model="name"
-                   name="name"
-                   :data-vv-as="'Имя'"
-                   v-validate="'required|min:3|max:16'">
-            <small class="form-text text-danger" v-if="errors.has('name')">
-              {{ errors.first('name') }}
-            </small>
+  <div>
+    <Form></Form>
+    <section class="comments__wrapper">
+      <div class="comments">
+        <div class="container">
+          <h3>Выводим комментарии</h3>
+          <div class="comments-view">
+            <div class="row">
+              <div class="col-4"
+                   v-for="(comment, index) in comments"
+                   v-bind:key="index">
+                <div>
+                  <div class="comments__item"
+                       :class="classComment(index)">
+                    <div class="comments__item-header">
+                      {{ comment.name }}
+                    </div>
+                    <div class="comments__item-content">
+                      <span>{{ comment.email }}</span>
+                      <p>{{ comment.comment }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="form__input-group">
-            <label for="email">E-Mail <span>*</span></label>
-            <input type="email"
-                   id="email"
-                   v-model="email"
-                   name="email"
-                   :data-vv-as="'E-Mail'"
-                   v-validate="'email|required'">
-            <small class="form-text text-danger" v-if="errors.has('email')">
-              {{ errors.first('email') }}
-            </small>
-          </div>
-        </div>
-        <div class="col-1"></div>
-        <div class="col-6 right">
-          <div class="form__input-group">
-            <label for="comment">Комментарий <span>*</span></label>
-            <textarea
-              id="comment"
-              v-model="comment"
-              name="comment"
-              :data-vv-as="'Комментарий'"
-              v-validate="'required|min:30'"></textarea>
-            <small class="form-text text-danger" v-if="errors.has('comment')">
-              {{ errors.first('comment') }}
-            </small>
-          </div>
-        </div>
-        <div class="col-12 d-flex justify-content-end">
-          <button :disabled="errors.any()" @click="addComment()" >Записать</button>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 
 <script>
+  import Form from "../components/Form"
+
   export default {
     data() {
       return {
-        name: null,
-        email: null,
-        comment: null
+        comments: null
       };
     },
-    components: {},
+    components: {
+      Form
+    },
     methods: {
-      async addComment() {
-        try {
-          const isValid = await this.$validator.validateAll();
-          if (isValid) {
-            const {name, email, comment} = this;
-           this.$store.commit('COMMENT', {name, email, comment});
-          }
-        } catch (e) {
-          alert(e)
-        }
+      classComment(index) {
+        return index % 2 ? 'comments__item_grey' : 'comments__item_green';
       }
-    }
+    },
+    computed: {
+      commentsData() {
+        return this.$store.getters.comment;
+      },
+    },
+    watch: {
+      commentsData(commentsData) {
+        this.comments = commentsData;
+      },
+    },
   };
 </script>
 

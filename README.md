@@ -1,4 +1,4 @@
-# test-shop
+# Motorfirst-vue-test
 
 ## Project setup
 ```
