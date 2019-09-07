@@ -10,7 +10,7 @@
               <div class="col-4"
                    v-for="(comment, index) in comments"
                    v-bind:key="index">
-                <div>
+                <router-link :to="{name: 'showComment'}">
                   <div class="comments__item"
                        :class="classComment(index)">
                     <div class="comments__item-header">
@@ -21,7 +21,7 @@
                       <p>{{ comment.comment }}</p>
                     </div>
                   </div>
-                </div>
+                </router-link >
               </div>
             </div>
           </div>
@@ -44,14 +44,20 @@
     components: {
       Form
     },
+    mounted() {
+      this.comments = this.getComments();
+    },
     methods: {
       classComment(index) {
         return index % 2 ? 'comments__item_grey' : 'comments__item_green';
+      },
+      getComments() {
+        return this.$store.getters.comment
       }
     },
     computed: {
       commentsData() {
-        return this.$store.getters.comment;
+        return this.getComments();
       },
     },
     watch: {

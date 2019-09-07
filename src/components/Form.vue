@@ -68,11 +68,18 @@
           if (isValid) {
             const {name, email, comment} = this;
             this.$store.commit('COMMENT', {name, email, comment});
+            this.resetForms();
           }
         } catch (e) {
           alert(e)
         }
       },
+      resetForms() {
+        this.name = null;
+        this.email = null;
+        this.comment = null;
+        this.$validator.reset()
+      }
     },
   };
 </script>

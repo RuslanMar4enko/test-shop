@@ -2,7 +2,9 @@
   <header class="header">
     <div class="container">
       <div class="row justify-content-center">
-        <img alt="logo" class="header__logo " src="../assets/logo.png">
+        <router-link :to="{name: 'home'}">
+        <img alt="logo" class="header__logo" src="../assets/logo.png">
+        </router-link>
       </div>
     </div>
   </header>
