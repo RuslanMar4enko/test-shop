@@ -1,11 +1,11 @@
 import Vue from "vue";
-import VeeValidate from "vee-validate";
+import * as VeeValidate from 'vee-validate';
 
-import validationUa from "../../../node_modules/vee-validate/dist/locale/ru.js";
+import validationRu from "../../node_modules/vee-validate/dist/locale/ru";
 
 Vue.use(VeeValidate, {
-	locale: "en",
-	dictionary: {
-		en: validationUa,
-	},
+  dictionary: {
+    en: validationRu,
+  },
 });
+
